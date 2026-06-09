@@ -1,59 +1,62 @@
 # algo-bilingual
 
-A bilingual data structures and algorithms practice repository with parallel Python and Go solutions. Each problem includes a `notes.md` file comparing the pattern, complexity, implementation details, and language-specific tradeoffs.
+A bilingual data structures and algorithms practice repository featuring parallel **Python** and **Go** solutions. Each problem includes a structured `notes.md` file comparing patterns, complexity, implementation details, and language-specific tradeoffs.
+
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
+[![Go](https://img.shields.io/badge/Go-1.18+-00ADD8?style=flat-square&logo=go&logoColor=white)](https://go.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](https://opensource.org/licenses/MIT)
 
 ---
 
 ## Purpose
 
 This repository is designed to:
-- improve algorithmic thinking with consistent problem patterns
-- reinforce idiomatic Python and idiomatic Go implementations
-- make language differences explicit rather than hiding them behind syntax
-- support interview prep and cross-language learning
+- **Improve algorithmic thinking** by identifying consistent, language-agnostic problem patterns.
+- **Reinforce idiomatic syntax** and design choices in both Python and Go.
+- **Expose runtime models** and language differences explicitly rather than hiding them behind syntax.
+- **Support interview preparation** and cross-language learning.
 
 ## Why Both Languages?
 
-Most DSA practice focuses on one language. This repo solves each problem in both Python and Go so you can:
-- compare a fast Python prototype with an explicit Go implementation
-- learn how the same algorithm maps to two runtime models
-- identify where convenience helps and where explicitness matters
+Most DSA practice focuses on a single language. Solving each problem in both Python and Go allows you to:
+- Compare a fast, high-level Python prototype with an explicit, high-performance Go implementation.
+- Understand how the same algorithm maps to two different runtime and memory models.
+- Identify where Python's convenience helps versus where Go's type-safety and explicitness prevent bugs.
 
-| Python 🐍 | Go ⚡ |
-|---|---|
-| fast prototyping | explicit performance
-| dynamic typing | strong typing
-| rich standard library | minimal runtime and concurrency support
-| common in AI/ML roles | common in backend and systems roles |
+| Feature / Aspect | Python 🐍 | Go ⚡ |
+| :--- | :--- | :--- |
+| **Development** | Fast prototyping, concise syntax | Explicit, structured code |
+| **Typing** | Dynamic typing | Strong, static typing |
+| **Standard Library** | Rich, built-in algorithms/data structures | Minimal runtime, built-in concurrency |
+| **Primary Industry Use** | AI/ML, data science, scripting | Backend systems, cloud, microservices |
 
 ---
 
 ## Prerequisites & Setup
 
-To work with this repository, ensure you have the following installed:
+Ensure you have the following installed:
 * **Python**: `3.10+` (leveraging modern standard library type hints)
-* **Go**: `1.18+` (supporting standard constructs and generics if needed)
+* **Go**: `1.18+` (supporting standard constructs and generics)
 
-No external libraries are required, as solutions rely entirely on standard library packages.
+All solutions rely strictly on the standard library—no external dependencies or external packages are required.
 
-To initialize your local Go environment:
+To verify your environment:
 ```bash
-# Verify Go installation and path setup
+python --version
 go version
-# The Go module has been pre-configured for the repository
 ```
 
 ---
 
 ## Repo Structure
 
-```
+```text
 algo-bilingual/
 ├── arrays/
 │   └── two_sum/
-│       ├── solution.py
-│       ├── solution.go
-│       └── notes.md
+│       ├── solution.py   # Idiomatic Python solution
+│       ├── solution.go   # Idiomatic Go solution
+│       └── notes.md      # Approach, complexity analysis, and comparisons
 ├── linked-list/
 ├── stacks-queues/
 ├── trees/
@@ -66,16 +69,21 @@ algo-bilingual/
 └── sorting/
 ```
 
-Each problem folder should contain:
-- `solution.py` — idiomatic Python solution
-- `solution.go` — idiomatic Go solution
-- `notes.md` — pattern, complexity, and a direct comparison of both implementations
+Each problem folder contains:
+- `solution.py` — Idiomatic Python solution
+- `solution.go` — Idiomatic Go solution
+- `notes.md` — Problem analysis, complexity table, and a direct comparison of both implementations
 
 ---
 
 ## Progress Tracker
 
 A central table to track problem-solving and comparison notes. This table is updated automatically when using the `scaffold.py` script.
+
+### Status Legend
+- ❌ **`Todo`**: Solution has not been started.
+- ⏳ **`In Progress`**: Solution is under active implementation or review.
+- ✅ **`Solved`** / **`Completed`**: Solution is fully implemented and tested.
 
 | # | Problem | Category | Python 🐍 | Go ⚡ | Notes 📝 | Difficulty |
 |---|---|---|---|---|---|---|
@@ -86,33 +94,35 @@ A central table to track problem-solving and comparison notes. This table is upd
 
 ---
 
-## How to Use This Repo
+## Testing & Execution
 
-1. Choose a category and open a problem folder.
-2. Read `notes.md` to understand the problem pattern.
-3. Compare `solution.py` and `solution.go` implementations.
-4. Run and test each solution if tests are available.
-5. Add your own notes on pitfalls or alternative approaches.
+### Running Python Solutions
+
+Execute the solution script directly to run embedded assertions or main function wrappers:
+```bash
+python arrays/two_sum/solution.py
+```
+
+### Running Go Solutions
+
+Run the solution file directly:
+```bash
+go run arrays/two_sum/solution.go
+```
+
+To run all tests (if any `*_test.go` files are present in the package):
+```bash
+go test ./...
+```
 
 ---
 
-## Testing Your Solutions
+## Coding Standards & Conventions
 
-### Python
-Python solutions can be tested by executing them directly if they contain embedded assertions or main function wrappers, or via standard testing tools:
-```bash
-python <category>/<problem_name>/solution.py
-```
-
-### Go
-Go solutions can be run directly or tested via the standard `go test` suite:
-```bash
-# Run a specific solution
-go run <category>/<problem_name>/solution.go
-
-# Run tests (if *_test.go is present)
-go test ./...
-```
+To keep the codebase consistent:
+1. **Standard Library Only**: Do not add external dependencies to `go.mod` or use `pip` packages.
+2. **Self-Contained Runner**: Each `solution.py` and `solution.go` should contain a driver function (`if __name__ == "__main__":` or `func main()`) demonstrating a simple verification test.
+3. **Bilingual Mirroring**: Use parallel naming for variables, data structures, and functions, adapting to each language's idiomatic styling (e.g. CamelCase in Go, snake_case in Python).
 
 ---
 
@@ -128,16 +138,16 @@ python scaffold.py
 python scaffold.py --category arrays --name "Two Sum" --difficulty Easy
 ```
 
-This script will:
-1. Create the appropriate subdirectory structure.
-2. Generate template boilerplate for `solution.py`, `solution.go`, and `notes.md`.
-3. Auto-register the problem and update the table in [Progress Tracker](#progress-tracker).
+### Supported Categories & Difficulties
 
-To add a problem manually:
-1. Create a new folder in the appropriate category.
-2. Add `solution.py` with a clear Python solution.
-3. Add `solution.go` with a clear Go solution.
-4. Create `notes.md` describing the approach, complexities, and tradeoffs using the template below.
+When using the command-line options, choose from:
+- **Categories**: `arrays`, `linked-list`, `stacks-queues`, `trees`, `graphs`, `binary-search`, `sliding-window`, `two-pointers`, `dynamic-programming`, `backtracking`, `sorting`
+- **Difficulties**: `Easy`, `Medium`, `Hard`
+
+The script will:
+1. Create the appropriate subdirectory structure.
+2. Generate boilerplate templates for `solution.py`, `solution.go`, and `notes.md`.
+3. Auto-register the problem and update the table in [Progress Tracker](#progress-tracker).
 
 ---
 
@@ -145,25 +155,33 @@ To add a problem manually:
 
 Every `notes.md` follows this structure:
 
-```
-Pattern        → e.g. Two Pointers / Sliding Window / DFS
-Approach       → step-by-step logic before any code
-Complexity     → time and space for both languages
-Key Differences → what Go makes explicit that Python hides
-Gotchas        → edge cases, common mistakes
-Problem Link   → original problem source or ID
-Status         → solved / in progress / review needed
-```
+```markdown
+# Problem Name
+
+| Pattern | Time Complexity | Space Complexity | Difficulty |
+|---|---|---|---|
+| Pattern Name | O(N) | O(1) | Easy/Medium/Hard |
 
 ---
 
-## Workflow Per Problem
+## Approach
+*Provide a step-by-step breakdown of the logic before coding.*
 
-1. Watch a lecture or read the problem statement.
-2. Solve in Python first for rapid validation.
-3. Re-implement in Go to reinforce explicit design.
-4. Write or update `notes.md` with cross-language comparisons.
-5. Commit one problem at a time for clean history.
+## Key Differences
+
+| Python 🐍 | Go ⚡ |
+|---|---|
+| *dynamic / simple* | *strongly typed / explicit* |
+
+## Gotchas & Edge Cases
+- Edge case 1
+
+---
+
+## Resources
+- **Problem Link:** [LeetCode]()
+- **Status:** ⏳ In Progress
+```
 
 ---
 
