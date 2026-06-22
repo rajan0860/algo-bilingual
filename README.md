@@ -88,7 +88,7 @@ A central table to track problem-solving and comparison notes. This table is upd
 | # | Problem | Category | Python 🐍 | Go ⚡ | Notes 📝 | Difficulty |
 |---|---|---|---|---|---|---|
 <!-- START_TRACKER -->
-| 001 | [Two Sum](./arrays/two_sum/) | Arrays | ⏳ In Progress | ❌ Todo | ❌ Todo | Easy |
+| 001 | [Two Sum](./arrays/two_sum/) | Arrays | ✅ Solved | ✅ Solved | ✅ Solved | Easy |
 | 002 | [Reverse Linked List](./linked-list/reverse_linked_list/) | Linked List | ⏳ In Progress | ❌ Todo | ❌ Todo | Easy |
 <!-- END_TRACKER -->
 
