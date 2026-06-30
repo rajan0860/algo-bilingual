@@ -11,5 +11,8 @@ def reverse_string(st : str) -> str:
     return ''.join(st)
 
 if __name__ == "__main__":
-    name = "Hello"
-    print(reverse_string(name))
+    assert reverse_string("Hello") == "olleH"
+    assert reverse_string("a")     == "a"
+    assert reverse_string("")      == ""
+    assert reverse_string("ab")    == "ba"
+    print("All tests passed!")

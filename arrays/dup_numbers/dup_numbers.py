@@ -1,11 +1,9 @@
 def is_duplicate(nums: list[int]) -> bool:
-    num_map = {}
-    for i, num in enumerate(nums):
-        num_map[num] = num_map.get(num, 0) + 1
-        count = num_map.get(num)
-        if (count >= 2):
-            print("Here is the duplicate number ", num)
+    seen = set()
+    for num in nums:
+        if num in seen:
             return True
+        seen.add(num)
     return False
 
 if __name__ == "__main__":
