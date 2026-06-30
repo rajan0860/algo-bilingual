@@ -3,17 +3,19 @@ package main
 import "fmt"
 
 func reverseString(s string) string {
-	l := 0
-	r := len(s) - 1
+	l, r := 0, len(s)-1
+	bytes := []byte(s)
 	for l < r {
-		s = s[:l] + string(s[r]) + s[l+1:r] + string(s[l]) + s[r+1:]
+		bytes[l], bytes[r] = bytes[r], bytes[l]
 		l++
 		r--
 	}
-	return s
+	return string(bytes)
 }
 
 func main() {
-	str := "Hello"
-	fmt.Println(reverseString(str))
+	tests := []string{"Hello", "Hannah", "a", "", "ab"}
+	for _, str := range tests {
+		fmt.Printf("reverseString(%q) = %q\n", str, reverseString(str))
+	}
 }
