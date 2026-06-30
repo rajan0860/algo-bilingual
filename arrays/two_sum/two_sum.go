@@ -18,16 +18,21 @@ func twoSum(nums []int, target int) (int, int) {
 
 func main() {
 	testCases := []struct {
-		nums   []int
-		target int
+		nums     []int
+		target   int
+		expected [2]int
 	}{
-		{[]int{2, 7, 11, 15}, 9},
-		{[]int{3, 2, 4}, 6},
-		{[]int{3, 3}, 6},
+		{[]int{2, 7, 11, 15}, 9, [2]int{0, 1}},
+		{[]int{3, 2, 4}, 6, [2]int{1, 2}},
+		{[]int{3, 3}, 6, [2]int{0, 1}},
 	}
 
 	for _, tc := range testCases {
 		i, j := twoSum(tc.nums, tc.target)
-		fmt.Printf("twoSum(%v, %d) = (%d, %d)\n", tc.nums, tc.target, i, j)
+		status := "failed"
+		if i == tc.expected[0] && j == tc.expected[1] {
+			status = "passed"
+		}
+		fmt.Printf("twoSum(%v, %d) = (%d, %d) -> %s\n", tc.nums, tc.target, i, j, status)
 	}
 }

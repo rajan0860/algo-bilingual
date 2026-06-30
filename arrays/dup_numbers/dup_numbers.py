@@ -7,10 +7,17 @@ def is_duplicate(nums: list[int]) -> bool:
     return False
 
 if __name__ == "__main__":
-    nums = [0, 2, 3, 1]
-    if is_duplicate(nums):
-        print("Duplicate number found")
-    else:
-        print("There are no duplicate number in the list")
+    tests = [
+        ([0, 2, 3, 1],     False),
+        ([1, 2, 3, 1],     True),    # duplicate at the ends
+        ([1, 1, 1, 3],     True),    # multiple duplicates
+        ([1],              False),   # single element
+        ([],               False),   # empty list
+    ]
+    
+    for nums, expected in tests:
+        result = is_duplicate(nums)
+        print(f"is_duplicate({nums}) = {result}, expected = {expected}")
+        assert result == expected, f"Test failed for input: {nums}"
         
         
