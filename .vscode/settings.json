@@ -1,3 +1,7 @@
 {
-    "editor.inlineSuggest.enabled": false
+    "editor.inlineSuggest.enabled": false,
+    "go.goroot": "/opt/homebrew/opt/go/libexec",
+    "terminal.integrated.env.osx": {
+        "PATH": "/opt/homebrew/bin:/opt/homebrew/sbin:${env:PATH}"
+    }
 }
