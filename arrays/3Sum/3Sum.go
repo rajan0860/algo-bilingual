@@ -2,15 +2,37 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	fmt.Println(thrSumOptimized([]int{-4, -1, -1, 0, 1, 2}))
+	testCases := [][]int{
+		{},                               // expected: [] (empty array)
+		{0},                              // expected: [] (single element)
+		{0, 0},                           // expected: [] (two elements, no triplet possible)
+		{1, 2, -3},                       // expected: [[-3, 1, 2]]
+		{1, 2, 3, 4, 5},                  // expected: [] (all positive, no valid triplet)
+		{-1, -2, -3, -4},                 // expected: [] (all negative, no valid triplet)
+		{0, 0, 0},                        // expected: [[0, 0, 0]]
+		{0, 0, 0, 0},                     // expected: [[0, 0, 0]]
+		{0, 0, 0, 0, 0},                  // expected: [[0, 0, 0]]
+		{-2, -2, 0, 0, 2, 2},             // expected: [[-2, 0, 2]]
+		{-1, -1, 2, 2, -1},               // expected: [[-1, -1, 2]]
+		{1, 1, -2, -2, 1},                // expected: [[-2, 1, 1]]
+		{-4, -1, -1, 0, 1, 2},            // expected: [[-1, -1, 2], [-1, 0, 1]]
+		{3, 0, -2, -1, 1, 2},             // expected: [[-2, -1, 3], [-2, 0, 2], [-1, 0, 1]]
+		{0, 0, 2, -2, 1, 1, 2, -2, 4},    // expected: [[-2, 0, 2], [-2, 1, 1], [-2, -2, 4]]
+		{1, -1, -3, 3, -3, -1, 1, 4, -2}, // expected: [[-2, 1, 1], [-3, -1, 4], [-2, -1, 3]]
+	}
 
+	for _, tc := range testCases {
+		fmt.Println(tc, "->", thrSumWithBruteForce(tc))
+		// and once your two-pointer version exists:
+		// fmt.Println(tc, "->", thrSumOptimized(tc))
+	}
 }
-
 func thrSumWithBruteForce(num []int) [][]int {
 	outcome := [][]int{}
 	seen := make(map[string]bool)
@@ -28,8 +50,10 @@ func thrSumWithBruteForce(num []int) [][]int {
 }
 
 func makeKey(row []int) string {
+	sorted := append([]int{}, row...) // copy so you don't mutate the original slice
+	sort.Ints(sorted)
 	var b strings.Builder
-	for _, num := range row {
+	for _, num := range sorted {
 		b.WriteString(strconv.Itoa(num))
 		b.WriteByte(',')
 	}
@@ -49,17 +73,17 @@ func addUnique(result [][]int, seen map[string]bool, row []int) [][]int {
 
 func thrSumOptimized(num []int) [][]int {
 	outcome := [][]int{}
+	sort.Ints(num)
 	for i := 0; i <= len(num)-1; i++ {
 		if i > 0 && num[i] == num[i-1] {
 			continue
 		}
-		initPtr := i
 		left := i + 1
 		right := len(num) - 1
 		for left < right {
 			sum := num[i] + num[left] + num[right]
 			if sum == 0 {
-				outcome = append(outcome, []int{num[initPtr], num[left], num[right]})
+				outcome = append(outcome, []int{num[i], num[left], num[right]})
 				left += 1
 				right -= 1
 				left = skipLeftDuplicates(num, left, right)
